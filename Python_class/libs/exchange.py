@@ -5,9 +5,8 @@ def my_sum(x, y):
     return x+y
 
 class Rate:
-    def __init__(self, format = 'value', diff = True):
+    def __init__(self, format='value'):
         self.format = format
-        self.diff = diff
     
     def exchange_rates(self):
         """
@@ -50,19 +49,11 @@ class Rate:
         response = self.exchange_rates()
         
         if currency in response:
+            if self.format == 'full':
+                return response[currency]
             
-            if self.diff == True:
-                aaa = response[currency]['Value']
-                bbb = response[currency]['Previous']
-                return aaa - bbb
-            
-            else:
-                if self.format == 'full':
-                    return response[currency]
-            
-                if self.format == 'value':
-                    return response[currency]['Value']
-                
+            if self.format == 'value':
+                return response[currency]['Value']
         
         return 'Error'
     
